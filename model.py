@@ -6,7 +6,7 @@ from langchain.llms import CTransformers
 from langchain.chains import RetrievalQA
 import chainlit as cl
 
-DB_FAISS_PATH = 'vectorstore/db_faiss'
+DB_FAISS_PATH = 'Llama2-Medical-Chatbot/vectorstore/db_faiss'
 
 custom_prompt_template = """Use the following pieces of information to answer the user's question.
 If you don't know the answer, just say that you don't know, don't try to make up an answer.
@@ -49,7 +49,7 @@ def load_llm():
 
 #QA Model Function
 def qa_bot():
-    embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2",
+    embeddings = HuggingFaceEmbeddings(model_name="/root/.cache/huggingface/hub/models--TheBloke--Llama-2-13B-chat-GGML/snapshots/47d28ef5de4f3de523c421f325a2e4e039035bab/llama-2-13b-chat.ggmlv3.q5_1.bin",
                                        model_kwargs={'device': 'cpu'})
     db = FAISS.load_local(DB_FAISS_PATH, embeddings)
     llm = load_llm()
